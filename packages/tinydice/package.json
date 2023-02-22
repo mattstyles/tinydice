@@ -1,0 +1,36 @@
+{
+  "name": "tinydice",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "main": "./lib/tinydice.umd.cjs",
+  "module": "./lib/tinydice.js",
+  "typings": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/tinydice.js",
+      "require": "./lib/tinydice.umd.cjs"
+    }
+  },
+  "scripts": {
+    "clean": "del lib",
+    "build": "vite build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "del": "^7.0.0",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4",
+    "vite-plugin-dts": "2.0.0-beta.3",
+    "tsconfig": "workspace:*"
+  },
+  "dependencies": {
+    "just-random-integer": "^4.2.0"
+  }
+}
