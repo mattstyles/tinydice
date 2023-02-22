@@ -7,6 +7,7 @@ import pkg from './package.json'
 export default defineConfig({
   build: {
     outDir: 'lib',
+    sourcemap: true,
     lib: {
       // Could also be a dictionary or array of multiple entry points
       entry: resolve(__dirname, 'src/index.ts'),
