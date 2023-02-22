@@ -24,6 +24,7 @@
     "next": "^13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "recharts": "^2.4.3",
     "tinydice": "workspace:*",
     "tsconfig": "workspace:*",
     "typescript": "4.9.5"
