@@ -7,12 +7,14 @@
     "packages/*"
   ],
   "scripts": {
+    "test": "CI=true turbo run test",
     "build": "turbo run build",
-    "dev": "turbo run dev",
+    "dev": "turbo run clean && turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
     "eslint-config-custom": "workspace:*",
     "prettier": "latest",
     "turbo": "latest"
@@ -20,6 +22,5 @@
   "engines": {
     "node": ">=14.0.0"
   },
-  "dependencies": {},
   "packageManager": "pnpm@7.25.0"
 }

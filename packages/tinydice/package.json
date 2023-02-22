@@ -1,7 +1,7 @@
 {
   "name": "tinydice",
   "version": "0.0.1",
-  "description": "",
+  "description": "Tiny library for dice rolls",
   "type": "module",
   "files": [
     "lib"
@@ -18,13 +18,14 @@
   "scripts": {
     "clean": "del lib",
     "test": "vitest",
+    "dev": "vite build --watch",
     "build": "vite build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "del": "^7.0.0",
+    "del-cli": "^5.0.0",
     "tsconfig": "workspace:*",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
