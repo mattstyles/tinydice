@@ -11,7 +11,11 @@ import {
   VStack,
   Input,
   Container,
+  List,
+  ListItem,
+  IconButton,
 } from '@chakra-ui/react'
+import {DeleteIcon} from '@chakra-ui/icons'
 import {
   ResponsiveContainer,
   AreaChart,
@@ -60,6 +64,25 @@ export default function DistributionChart() {
       }
       const sample = generateSample(fn)
       setSamples(new Map(samples.set(id, sample)))
+      setSampleKey(() => {
+        return [...sampleKeys, id]
+      })
+    },
+    [samples, setSamples]
+  )
+
+  const removeSample = useCallback(
+    (id: string) => {
+      if (!samples.has(id)) {
+        console.log('ID not in sample set')
+        return
+      }
+
+      samples.delete(id)
+      setSamples(new Map(samples))
+      setSampleKey(() => {
+        return sampleKeys.filter((sid) => sid == id)
+      })
     },
     [samples, setSamples]
   )
@@ -67,9 +90,6 @@ export default function DistributionChart() {
   const data = useMemo<ChartData>(() => {
     const dataMap = new Map()
     samples.forEach((sample, id) => {
-      setSampleKey(() => {
-        return [...sampleKeys, id]
-      })
       sample.forEach((value, key) => {
         const datum = dataMap.get(key) ?? {num: key}
         dataMap.set(key, {...datum, [id]: value})
@@ -91,11 +111,14 @@ export default function DistributionChart() {
       <VStack>
         <Heading>Distribution chart</Heading>
         <AddNewSample addNewSample={addNewSample} />
-        <Container>
-          <AspectRatio maxW='100%' ratio={4 / 3}>
-            <Chart data={data} keys={sampleKeys} />
-          </AspectRatio>
-        </Container>
+        <HStack align='flex-start'>
+          <Container css={{minWidth: 640}}>
+            <AspectRatio maxW='100%' ratio={4 / 3}>
+              <Chart data={data} keys={sampleKeys} />
+            </AspectRatio>
+          </Container>
+          <ChartKeyControl keys={sampleKeys} onRemoveKey={removeSample} />
+        </HStack>
       </VStack>
     </Box>
   )
@@ -190,5 +213,36 @@ function Chart({data, keys}: {data: ChartData; keys: ChartKeys}) {
         })}
       </AreaChart>
     </ResponsiveContainer>
+  )
+}
+
+function ChartKeyControl({
+  keys,
+  onRemoveKey,
+}: {
+  keys: ChartKeys
+  onRemoveKey: (id: string) => void
+}) {
+  return (
+    <Container css={{minWidth: 300}}>
+      <List>
+        {keys.map((key) => {
+          return (
+            <ListItem key={key}>
+              <HStack>
+                <IconButton
+                  aria-label={`Delete sample ${key}`}
+                  variant='ghost'
+                  size='sm'
+                  icon={<DeleteIcon />}
+                  onClick={() => onRemoveKey(key)}
+                />
+                <Text>{key}</Text>
+              </HStack>
+            </ListItem>
+          )
+        })}
+      </List>
+    </Container>
   )
 }
