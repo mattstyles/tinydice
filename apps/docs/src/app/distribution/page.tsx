@@ -172,7 +172,7 @@ function Chart({data, keys}: {data: ChartData; keys: ChartKeys}) {
         data={data}
         margin={{top: 20, right: 20, left: 20, bottom: 20}}>
         <CartesianGrid strokeDasharray='.1 .1' />
-        <XAxis dataKey='key' />
+        <XAxis dataKey='num' />
         <YAxis />
         <Legend />
         <Tooltip />
@@ -183,7 +183,7 @@ function Chart({data, keys}: {data: ChartData; keys: ChartKeys}) {
               isAnimationActive={false}
               type='monotone'
               dataKey={key}
-              stroke='#8884d8'
+              stroke={colors[idx % colors.length]}
               fill={colors[idx % colors.length]}
             />
           )
