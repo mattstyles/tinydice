@@ -1,6 +1,6 @@
 {
   "name": "tinydice-mod",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Modifiers for tinydice rolls, not so tiny dice powers.",
   "type": "module",
   "files": [
