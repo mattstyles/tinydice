@@ -92,6 +92,25 @@ importers:
       vite-plugin-dts: 2.0.0-beta.3_vite@4.1.4
       vitest: 0.28.5
 
+  packages/tinydice-mod:
+    specifiers:
+      del-cli: ^5.0.0
+      tinydice: workspace:*
+      tsconfig: 'workspace: *'
+      typescript: ^4.9.5
+      vite: ^4.1.4
+      vite-plugin-dts: 2.0.0-beta.3
+      vitest: ^0.28.5
+    dependencies:
+      tinydice: link:../tinydice
+    devDependencies:
+      del-cli: 5.0.0
+      tsconfig: link:../tsconfig
+      typescript: 4.9.5
+      vite: 4.1.4
+      vite-plugin-dts: 2.0.0-beta.3_vite@4.1.4
+      vitest: 0.28.5
+
   packages/tsconfig:
     specifiers: {}
 

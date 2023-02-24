@@ -1,7 +1,7 @@
 {
-  "name": "tinydice",
+  "name": "tinydice-mod",
   "version": "0.0.2",
-  "description": "Tiny library for dice rolls",
+  "description": "Modifiers for tinydice rolls, not so tiny dice powers.",
   "type": "module",
   "files": [
     "lib"
@@ -25,17 +25,17 @@
     "dice",
     "random"
   ],
-  "author": "Matt Styles",
+  "author": "",
   "license": "MIT",
   "devDependencies": {
     "del-cli": "^5.0.0",
-    "tsconfig": "workspace:*",
+    "tsconfig": "workspace: *",
     "typescript": "^4.9.5",
     "vite": "^4.1.4",
     "vite-plugin-dts": "2.0.0-beta.3",
     "vitest": "^0.28.5"
   },
   "dependencies": {
-    "just-random-integer": "^4.2.0"
+    "tinydice": "workspace:*"
   }
 }
