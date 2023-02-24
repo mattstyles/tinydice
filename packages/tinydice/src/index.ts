@@ -1,19 +1,28 @@
-import random from 'just-random-integer'
+type Options = {
+  random: () => number
+}
+const defOptions: Options = {
+  random: Math.random,
+}
 
 export type Dice = [number, number]
-export function dice(num: number, sides: number): number {
+export function dice(
+  num: number,
+  sides: number,
+  options: Options = defOptions
+): number {
   if (num <= 0) {
     throw new Error('tinydice: Number of dice must be positive')
   }
   let total = 0
   while (--num >= 0) {
-    total = total + random(1, sides)
+    total = total + rand(1, sides, options.random)
   }
   return total
 }
 
-export function diceString(str: string): number {
-  return dice(...convert(str))
+export function diceString(str: string, options: Options = defOptions): number {
+  return dice(...convert(str), options)
 }
 
 export const reDice = /(?<n>^[0-9]+)d(?<m>[0-9]+$)/
@@ -40,12 +49,26 @@ export function convert(str: string): Dice {
   }
 }
 
-export function d(n: string): number
-export function d(n: number, m?: number): number
-export function d(n: number | string, m?: number): number {
+export function d(n: string, options?: Options): number
+export function d(n: number, m: number | Options, options?: Options): number
+export function d(
+  n: number | string,
+  m?: number | Options,
+  options: Options = defOptions
+): number {
   if (typeof n === 'string') {
-    return diceString(n)
+    return diceString(n, typeof m == 'object' ? m : defOptions)
   }
 
-  return dice(n, m ?? 6)
+  const mm = typeof m === 'number' ? m : 6
+  const o = typeof m === 'object' ? m : options
+  return dice(n, mm, o)
+}
+
+export function rand(
+  lower: number,
+  upper: number,
+  fn: () => number = Math.random
+) {
+  return Math.trunc(lower + (upper + 1 - lower) * fn())
 }

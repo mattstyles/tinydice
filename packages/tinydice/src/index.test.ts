@@ -153,3 +153,11 @@ describe('Dice string conversion', () => {
     }
   })
 })
+
+describe('Custom rng', () => {
+  test('Expect dice functions to use the custom rng passed to it', () => {
+    const rng = () => 0.99999
+    expect(d('1d6', {random: rng})).toBe(6)
+    expect(d(2, 6, {random: rng})).toBe(12)
+  })
+})
