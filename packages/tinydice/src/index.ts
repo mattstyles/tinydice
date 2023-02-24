@@ -1,7 +1,7 @@
-type Options = {
+export type DiceOptions = {
   random: () => number
 }
-const defOptions: Options = {
+const defOptions: DiceOptions = {
   random: Math.random,
 }
 
@@ -9,7 +9,7 @@ export type Dice = [number, number]
 export function dice(
   num: number,
   sides: number,
-  options: Options = defOptions
+  options: DiceOptions = defOptions
 ): number {
   if (num <= 0) {
     throw new Error('tinydice: Number of dice must be positive')
@@ -21,7 +21,10 @@ export function dice(
   return total
 }
 
-export function diceString(str: string, options: Options = defOptions): number {
+export function diceString(
+  str: string,
+  options: DiceOptions = defOptions
+): number {
   return dice(...convert(str), options)
 }
 
@@ -49,12 +52,16 @@ export function convert(str: string): Dice {
   }
 }
 
-export function d(n: string, options?: Options): number
-export function d(n: number, m: number | Options, options?: Options): number
+export function d(n: string, options?: DiceOptions): number
+export function d(
+  n: number,
+  m: number | DiceOptions,
+  options?: DiceOptions
+): number
 export function d(
   n: number | string,
-  m?: number | Options,
-  options: Options = defOptions
+  m?: number | DiceOptions,
+  options: DiceOptions = defOptions
 ): number {
   if (typeof n === 'string') {
     return diceString(n, typeof m == 'object' ? m : defOptions)
